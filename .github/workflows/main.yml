@@ -1,0 +1,23 @@
+﻿name: Verificacion automatica
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Verificar archivo index.html
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html verificado correctamente."
+          else
+            echo "Error: index.html no encontrado."
+            exit 1
+          fi
